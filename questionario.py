@@ -141,9 +141,11 @@ escalas_1 = [
 
 # Loop para gerar perguntas de escala 0-10
 respostas_escala_1 = {}
+idx = 0
 for pergunta in escalas_1:
     st.markdown(pergunta,unsafe_allow_html=True)
-    respostas_escala_1[pergunta] = st.slider(" ", 0, 10, 5,key=1)
+    respostas_escala_1[pergunta] = st.slider(" ", 0, 10, 5,key=idx)
+    idx += 1
 
 
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -160,11 +162,12 @@ escalas_2 = [
 ]
 
 # Loop para gerar perguntas de escala 0-10
+idx = 0
 respostas_escala_2 = {}
 for pergunta in escalas_2:
     st.markdown(pergunta, unsafe_allow_html=True)
-    respostas_escala_2[pergunta] = st.slider(" ", 0, 10, 5, key=1) 
-
+    respostas_escala_2[pergunta] = st.slider(" ", 0, 10, 5, key=idx) 
+    idx += 1
 
 st.markdown("<hr>", unsafe_allow_html=True)
 # Pergunta: Opinião sobre a LITTERACI
