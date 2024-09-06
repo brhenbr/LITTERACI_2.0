@@ -35,7 +35,6 @@ session_id = generate_session_id()
 
 ######## O Formulário comeca aqui ########
 # Título do formulário
-st.title("Pesquisa de Validação - LITTERACI")
 st.markdown("<h1>Pesquisa de Validação - LITTERACI</h1>",unsafe_allow_html=True)
 
 # Estilo do formulário
@@ -75,7 +74,7 @@ st.markdown(
         background-color: var(--input-background-color) !important;
     }
     /* Aumentar o tamanho da fonte das perguntas */
-    .css-1d391kg {
+    .css-fonte {
         font-size: var(--question-font-size) !important;
         font-weight: bold;
     }
@@ -110,7 +109,7 @@ st.markdown(
 # Adicionar separação e textos para seções
 st.markdown("<div class='section-title'> Olá! Obrigado por aceitar participar desta pesquisa sobre Unidades de Informação (Arquivos, Bibliotecas, Museus)!<br>Responda as perguntas a seguir com base na Unidade de Informação (UI) na qual você trabalha atualmente, ou que atuou nos últimos 5 anos.<br></div>", unsafe_allow_html=True)
 
-titulo = st.markdown("<div class='css-1d391kg'>Tipo de Unidade de Informação (UI) na qual trabalha atualmente, ou que atuou nos últimos 5 anos:<br></div>", unsafe_allow_html=True)
+titulo = st.markdown("<div class='css-fonte'><br>Tipo de Unidade de Informação (UI) na qual trabalha atualmente, ou que atuou nos últimos 5 anos:</div>", unsafe_allow_html=True)
 
 # Perguntas do formulário
 # Pergunta 1: Tipo de Unidade de Informação
@@ -121,16 +120,16 @@ tipo_ui = st.selectbox("",
 
 # Pergunta em Escala de 0 a 10 - Parte 1
 st.markdown("<h2>Situação atual (presente) da minha Unidade de Informação (UI)</h2>",unsafe_allow_html=True)
-st.markdown("<div class='section-subtitle'> Gostaria que você desse uma nota, de 0 a 10, considerando a escala de concordância/discordância abaixo, sobre algumas afirmativas relacionadas à situação atual de sua Unidade de Informação (UI) 0. Discordo totalmente (DT) -   1   -   2   -   3   -   4   -   5   -   6   -  7   -  8   -   9   -   10. Concordo totalmente (CT)</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-subtitle'> Gostaria que você desse uma nota, de 0 a 10, considerando a escala de concordância/discordância abaixo, sobre algumas afirmativas relacionadas à situação atual de sua Unidade de Informação (UI) 0. Discordo totalmente (DT) -   1   -   2   -   3   -   4   -   5   -   6   -  7   -  8   -   9   -   10. Concordo totalmente (CT).</div>", unsafe_allow_html=True)
 
 escalas_1 = [
-    "O comportamento do(s) usuário(s) que minha Unidade de Informação atende tem mudado nos últimos 5 anos",
-    "O número de usuários que utiliza minha Unidade de Informação (espaço físico, site, produtos, serviços, etc.) tem aumentado nos últimos 5 anos",
-    "Minha Unidade de Informação consegue atender plenamente qualquer demanda informacional do meu usuário",
-    "Minha base de dados/catálogo consegue recuperar de maneira satisfatória qualquer dado ou informação demandado pelo usuário",
-    "Minha Unidade de Informação possui sistemas de informação que conseguem atender/recuperar/responder qualquer demanda do usuário",
-    "Minha Unidade de Informação possui bases de dados interligadas com outras UIs",
-    "Minha Uindade de Informação possui serviço de curadoria de dados e de conteúdo para o usuário",
+    st.markdown("<div class='css-fonte'><br>O comportamento do(s) usuário(s) que minha Unidade de Informação atende tem mudado nos últimos 5 anos</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>O número de usuários que utiliza minha Unidade de Informação (espaço físico, site, produtos, serviços, etc.) tem aumentado nos últimos 5 anos</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação consegue atender plenamente qualquer demanda informacional do meu usuário</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha base de dados/catálogo consegue recuperar de maneira satisfatória qualquer dado ou informação demandado pelo usuário</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação possui sistemas de informação que conseguem atender/recuperar/responder qualquer demanda do usuário</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação possui bases de dados interligadas com outras UIs</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha Uindade de Informação possui serviço de curadoria de dados e de conteúdo para o usuário</div>", unsafe_allow_html=True),
     "Minha Unidade de Informação trabalha com soluções (produtos e/ou serviços) baseadas em Inteligência Artificial (IA)",
     "Minha Unidade de Informação está mudando/mudou seus processos, produtos e/ou serviços por causa do novo contexto digital",
     "Minha Unidade de Informação analisa o comportamento de busca dos usuários para criar novos produtos e serviços baseados nas suas necessidades",
