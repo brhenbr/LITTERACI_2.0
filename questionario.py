@@ -220,6 +220,8 @@ if st.button("Enviar respostas"):
     
 
 st.markdown("<hr>", unsafe_allow_html=True)
+respostas_completas = [timestamp, session_id, tipo_ui, respostas_escala_1, respostas_escala_2] + [", ".join(opcoes_litteraci), feedback]
+st.write(f"teste1: {respostas_completas}")
 st.write(f"Teste: {respostas_escala_2}")
 logo = Image.open('images/logo.png')
 st.image(logo, use_column_width=True)
