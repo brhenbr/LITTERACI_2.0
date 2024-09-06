@@ -106,7 +106,7 @@ st.markdown(
 )
 
 # Adicionar separação e textos para seções
-st.markdown("<div class='section-title'> Olá! Obrigado por aceitar participar desta pesquisa sobre Unidades de Informação (Arquivos, Bibliotecas, Museus)! Responda as perguntas a seguir com base na Unidade de Informação (UI) na qual você trabalha atualmente, ou que atuou nos últimos 5 anos.</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-subtitle'> Olá! Obrigado por aceitar participar desta pesquisa sobre Unidades de Informação (Arquivos, Bibliotecas, Museus)! Responda as perguntas a seguir com base na Unidade de Informação (UI) na qual você trabalha atualmente, ou que atuou nos últimos 5 anos.</div>", unsafe_allow_html=True)
 
 # Perguntas do formulário
 # Pergunta 1: Tipo de Unidade de Informação
@@ -117,7 +117,7 @@ tipo_ui = st.selectbox("Tipo de Unidade de Informação (UI) na qual trabalha at
 
 # Pergunta em Escala de 0 a 10 - Parte 1
 st.markdown("<h2>Situação atual (presente) da minha Unidade de Informação (UI)</h2>",unsafe_allow_html=True)
-st.markdown("<div class='section-title'> Gostaria que você desse uma nota, de 0 a 10, considerando a escala de concordância/discordância abaixo, sobre algumas afirmativas relacionadas à situação atual de sua Unidade de Informação (UI) 0. Discordo totalmente (DT) -   1   -   2   -   3   -   4   -   5   -   6   -  7   -  8   -   9   -   10. Concordo totalmente (CT)</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-subtitle'> Gostaria que você desse uma nota, de 0 a 10, considerando a escala de concordância/discordância abaixo, sobre algumas afirmativas relacionadas à situação atual de sua Unidade de Informação (UI) 0. Discordo totalmente (DT) -   1   -   2   -   3   -   4   -   5   -   6   -  7   -  8   -   9   -   10. Concordo totalmente (CT)</div>", unsafe_allow_html=True)
 
 escalas_1 = [
     "O comportamento do(s) usuário(s) que minha Unidade de Informação atende tem mudado nos últimos 5 anos",
@@ -143,7 +143,7 @@ for pergunta in escalas_1:
 
 # Pergunta em Escala de 0 a 10 - Parte 2
 st.markdown("<h2>Situação futura da minha Unidade de Informação (UI)</h2>",unsafe_allow_html=True)
-st.markdown("<div class='section-title'> Agora, gostaria que você desse uma nota, de 0 a 10, considerando a escala de concordância/discordância abaixo, sobre algumas afirmativas relacionadas à situação futura de sua Unidade de Informação (UI), e considerando os próximos 5 anos (até 2030). 0. Discordo totalmente (DT) -   1   -   2   -   3   -   4   -   5   -   6   -  7   -  8   -   9   -   10. Concordo totalmente (CT)</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-subtitle'> Agora, gostaria que você desse uma nota, de 0 a 10, considerando a escala de concordância/discordância abaixo, sobre algumas afirmativas relacionadas à situação futura de sua Unidade de Informação (UI), e considerando os próximos 5 anos (até 2030). 0. Discordo totalmente (DT) -   1   -   2   -   3   -   4   -   5   -   6   -  7   -  8   -   9   -   10. Concordo totalmente (CT)</div>", unsafe_allow_html=True)
 
 escalas_2 = [
     "Minha Unidade de Informação está totalmente adaptada aos novos comportamentos dos usuários (considerando o contexto digital)",
@@ -161,8 +161,8 @@ for pergunta in escalas_2:
 
 # Pergunta: Opinião sobre a LITTERACI
 
-var_texto = """<div>Para encerrarmos nossa entrevista, quero apresentar-lhe uma breve descrição de uma potencial solução inovadora para Unidades 
-de Informação em geral, denominada LITTERACI: A LITTERACI é uma solução pioneira para Unidades de Informação, plataforma que integra diversos 
+var_texto = """<div class='section-subtitle'>Para encerrarmos nossa entrevista, quero apresentar-lhe uma breve descrição de uma potencial solução inovadora para Unidades 
+de Informação em geral, denominada LITTERACI: <br> A LITTERACI é uma solução pioneira para Unidades de Informação, plataforma que integra diversos 
 tipos de fontes de informação (como catálogos, bases de dados, bibliotecas digitais e repositórios) em uma única interface, 
 tecnologias de Customer Relationship Management (CRM) e Business Intelligence (BI) para aprendizado contínuo e enriquecimento 
 constante do acervo, analytics para monitorar e aprimorar continuamente a precisão e a relevância das buscas, e curadoria personalizada no 
