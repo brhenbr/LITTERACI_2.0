@@ -49,7 +49,7 @@ st.markdown(
         --button-text-color: #FFFFFF;
         --input-background-color: #FFFFFF;
         --slider-color: #A42593; /* Cor do slider */
-        --question-font-size: 16px; /* Tamanho da fonte das perguntas */        
+        --question-font-size: 18px; /* Tamanho da fonte das perguntas */        
     }
 
     /* Aplicar cores ao fundo e texto */
@@ -108,6 +108,7 @@ st.markdown(
 
 # Adicionar separação e textos para seções
 st.markdown("<div class='section-title'> Olá! Obrigado por aceitar participar desta pesquisa sobre Unidades de Informação (Arquivos, Bibliotecas, Museus)!<br>Responda as perguntas a seguir com base na Unidade de Informação (UI) na qual você trabalha atualmente, ou que atuou nos últimos 5 anos.<br></div>", unsafe_allow_html=True)
+st.markdown("<hr>", unsafe_allow_html=True)
 
 titulo = st.markdown("<div class='css-fonte'><br>Tipo de Unidade de Informação (UI) na qual trabalha atualmente, ou que atuou nos últimos 5 anos:</div>", unsafe_allow_html=True)
 
