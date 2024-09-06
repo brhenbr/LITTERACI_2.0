@@ -172,19 +172,21 @@ st.markdown("<hr>", unsafe_allow_html=True)
 # Pergunta: Opinião sobre a LITTERACI
 
 var_texto = """<div class='css-fonte'>Para encerrarmos nossa entrevista, quero apresentar-lhe uma breve descrição de uma potencial solução inovadora para Unidades 
-de Informação em geral, denominada LITTERACI: <br> A LITTERACI é uma solução pioneira para Unidades de Informação, plataforma que integra diversos 
+de Informação em geral, denominada LITTERACI: <br><br> A LITTERACI é uma solução pioneira para Unidades de Informação, plataforma que integra diversos 
 tipos de fontes de informação (como catálogos, bases de dados, bibliotecas digitais e repositórios) em uma única interface, 
 tecnologias de Customer Relationship Management (CRM) e Business Intelligence (BI) para aprendizado contínuo e enriquecimento 
 constante do acervo, analytics para monitorar e aprimorar continuamente a precisão e a relevância das buscas, e curadoria personalizada no 
-atendimento de qualquer demanda informacional. Ao integrar a linguagem natural do usuário e a curadoria especializada aos metadados tradicionais, 
+atendimento de qualquer demanda informacional.<br> Ao integrar a linguagem natural do usuário e a curadoria especializada aos metadados tradicionais, 
 a LITTERACI proporciona uma recuperação mais precisa e relevante dos recursos informacionais, promovendo uma interação mais eficiente e 
 personalizada dos conteúdos disponíveis.</div>"""
 
 st.markdown("<h2>Proposta de Solução Inovadora</h2>",unsafe_allow_html=True)
 st.markdown(var_texto, unsafe_allow_html=True)
+st.markdown("<hr>", unsafe_allow_html=True)
 
+st.markdown("<div class='css-fonte'>A partir dessa breve descrição da LITTERACI, gostaria de saber qual(is) a(s) sua(s) opinião(ões)?</div>", unsafe_allow_html=True)
 opcoes_litteraci = st.multiselect(
-    "A partir dessa breve descrição da LITTERACI, gostaria de saber qual(is) a(s) sua(s) opinião(ões)?",
+    "",
     ["A LITTERACI ajudaria minha Unidade de Informação a se manter atual e ativa",
      "A minha Unidade de Informação precisa dessa solução para aprimorar a sua forma de atendimento ao usuário",
      "Eu e/ou a minha Unidade de Informação estaria disposto(a) a conhecer com mais detalhes a LITTERACI",
@@ -192,23 +194,28 @@ opcoes_litteraci = st.multiselect(
      "Eu e/ou minha Unidade de Informação não tenho interesse em conhecer e/ou adquirir essa solução"]
 )
 
-
+st.markdown("<hr>", unsafe_allow_html=True)
 # Pergunta: Feedback final e contato
-feedback = st.text_area("Obrigado por responder a esta pesquisa! Caso queira receber um retorno sobre suas respostas, basta digitar abaixo seu nome e email. Entraremos em contato!")
+st.markdown("<div class='css-fonte'>Obrigado por responder a esta pesquisa! Caso queira receber um retorno sobre suas respostas, basta digitar abaixo seu nome e email. Entraremos em contato!</div>", unsafe_allow_html=True)
+feedback = st.text_area()
 
 # Fim do formulário
 
 # Submissão do formulário
 # Botão de envio
 if st.button("Enviar respostas"):
+    st.markdown("<hr>", unsafe_allow_html=True)
 
     respostas_completas = [timestamp, session_id, tipo_ui] + respostas_escala_1 + respostas_escala_1 + [", ".join(opcoes_litteraci), feedback]
     
     # Gravar no Google Sheets
     sheet.append_row(respostas_completas)
     
-    st.success("Obrigado por participar da pesquisa!")
-    st.write("Suas respostas foram enviadas com sucesso. A LITTERACI agradece a sua colaboração!")
+    st.success()
+    st.markdown("<div class='section-title'>Obrigado por participar da pesquisa!</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Suas respostas foram enviadas com sucesso. A LITTERACI agradece a sua colaboração!</div>", unsafe_allow_html=True)
+    
 
+st.markdown("<hr>", unsafe_allow_html=True)
 logo = Image.open('images/logo.png')
 st.image(logo, use_column_width=True)
