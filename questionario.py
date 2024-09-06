@@ -201,12 +201,16 @@ feedback = st.text_area(" ")
 
 # Fim do formulário
 
+#Transforma dicionario em lists
+respostas_escala_1 = list(respostas_escala_1.values())
+respostas_escala_2 = list(respostas_escala_2.values())
+
 # Submissão do formulário
 # Botão de envio
 if st.button("Enviar respostas"):
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    respostas_completas = [timestamp, session_id, tipo_ui] + [", ".join(list(respostas_escala_1.values()))] + [", ".join(list(respostas_escala_2.values()))] + [", ".join(opcoes_litteraci), feedback]
+    respostas_completas = [timestamp, session_id, tipo_ui, respostas_escala_1, respostas_escala_2] + [", ".join(opcoes_litteraci), feedback]
     
     # Gravar no Google Sheets
     sheet.append_row(respostas_completas)
@@ -216,6 +220,6 @@ if st.button("Enviar respostas"):
     
 
 st.markdown("<hr>", unsafe_allow_html=True)
-st.write(f"Teste: {list(respostas_escala_2.values())}")
+st.write(f"Teste: {respostas_escala_2}")
 logo = Image.open('images/logo.png')
 st.image(logo, use_column_width=True)
