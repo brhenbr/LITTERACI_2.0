@@ -114,7 +114,7 @@ titulo = st.markdown("<div class='css-1d391kg'>Tipo de Unidade de Informação (
 
 # Perguntas do formulário
 # Pergunta 1: Tipo de Unidade de Informação
-tipo_ui = st.selectbox(titulo, 
+tipo_ui = st.selectbox("", 
                        ["Arquivo (setor público)", "Arquivo (setor privado)", "Biblioteca (setor público)", 
                         "Biblioteca (setor privado)", "Museu (setor público)", "Museu (setor privado)", 
                         "Outro tipo de Unidade de Informação"])
