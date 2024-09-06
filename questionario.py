@@ -119,9 +119,10 @@ tipo_ui = st.selectbox("",
                         "Biblioteca (setor privado)", "Museu (setor público)", "Museu (setor privado)", 
                         "Outro tipo de Unidade de Informação"])
 
+st.markdown("<hr>", unsafe_allow_html=True)
 # Pergunta em Escala de 0 a 10 - Parte 1
 st.markdown("<h2>Situação atual (presente) da minha Unidade de Informação (UI)</h2>",unsafe_allow_html=True)
-st.markdown("<div class='section-subtitle'> Gostaria que você desse uma nota, de 0 a 10, considerando a escala de concordância/discordância abaixo, sobre algumas afirmativas relacionadas à situação atual de sua Unidade de Informação (UI) 0. Discordo totalmente (DT) -   1   -   2   -   3   -   4   -   5   -   6   -  7   -  8   -   9   -   10. Concordo totalmente (CT).</div>", unsafe_allow_html=True)
+st.markdown("<div class='css-fonte'> Gostaria que você desse uma nota, de 0 a 10, considerando a escala de concordância/discordância abaixo, sobre algumas afirmativas relacionadas à situação atual de sua Unidade de Informação (UI) 0. Discordo totalmente (DT) -   1   -   2   -   3   -   4   -   5   -   6   -  7   -  8   -   9   -   10. Concordo totalmente (CT).</div>", unsafe_allow_html=True)
 
 escalas_1 = [
     st.markdown("<div class='css-fonte'><br>O comportamento do(s) usuário(s) que minha Unidade de Informação atende tem mudado nos últimos 5 anos</div>", unsafe_allow_html=True),
@@ -131,41 +132,43 @@ escalas_1 = [
     st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação possui sistemas de informação que conseguem atender/recuperar/responder qualquer demanda do usuário</div>", unsafe_allow_html=True),
     st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação possui bases de dados interligadas com outras UIs</div>", unsafe_allow_html=True),
     st.markdown("<div class='css-fonte'><br>Minha Uindade de Informação possui serviço de curadoria de dados e de conteúdo para o usuário</div>", unsafe_allow_html=True),
-    "Minha Unidade de Informação trabalha com soluções (produtos e/ou serviços) baseadas em Inteligência Artificial (IA)",
-    "Minha Unidade de Informação está mudando/mudou seus processos, produtos e/ou serviços por causa do novo contexto digital",
-    "Minha Unidade de Informação analisa o comportamento de busca dos usuários para criar novos produtos e serviços baseados nas suas necessidades",
-    "Minha Unidade de Informação trabalha com indicadores sobre a satisfação do usuário, a retenção do usuário e a recomendação do usuário a outras pessoas",
-    "Minha Unidade de Informação é um lugar onde meu usuário gosta de estar presente fisicamente",
-    "Minha Unidade de Informação é a primeira opção para meu usuário quando ele busca por informação",
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação trabalha com soluções (produtos e/ou serviços) baseadas em Inteligência Artificial (IA)</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação está mudando/mudou seus processos, produtos e/ou serviços por causa do novo contexto digital</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação analisa o comportamento de busca dos usuários para criar novos produtos e serviços baseados nas suas necessidades</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação trabalha com indicadores sobre a satisfação do usuário, a retenção do usuário e a recomendação do usuário a outras pessoas</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação é um lugar onde meu usuário gosta de estar presente fisicamente</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação é a primeira opção para meu usuário quando ele busca por informação</div>", unsafe_allow_html=True)
 ]
 
 # Loop para gerar perguntas de escala 0-10
 respostas_escala_1 = {}
 for pergunta in escalas_1:
-    respostas_escala_1[pergunta] = st.slider(pergunta, 0, 10, 2)
+    respostas_escala_1[pergunta] = st.slider(pergunta, 0, 10, 5,1)
 
 
+st.markdown("<hr>", unsafe_allow_html=True)
 # Pergunta em Escala de 0 a 10 - Parte 2
 st.markdown("<h2>Situação futura da minha Unidade de Informação (UI)</h2>",unsafe_allow_html=True)
-st.markdown("<div class='section-subtitle'> Agora, gostaria que você desse uma nota, de 0 a 10, considerando a escala de concordância/discordância abaixo, sobre algumas afirmativas relacionadas à situação futura de sua Unidade de Informação (UI), e considerando os próximos 5 anos (até 2030). 0. Discordo totalmente (DT) -   1   -   2   -   3   -   4   -   5   -   6   -  7   -  8   -   9   -   10. Concordo totalmente (CT)</div>", unsafe_allow_html=True)
+st.markdown("<div class='css-fonte'> Agora, gostaria que você desse uma nota, de 0 a 10, considerando a escala de concordância/discordância abaixo, sobre algumas afirmativas relacionadas à situação futura de sua Unidade de Informação (UI), e considerando os próximos 5 anos (até 2030). 0. Discordo totalmente (DT) -   1   -   2   -   3   -   4   -   5   -   6   -  7   -  8   -   9   -   10. Concordo totalmente (CT)</div>", unsafe_allow_html=True)
 
 escalas_2 = [
-    "Minha Unidade de Informação está totalmente adaptada aos novos comportamentos dos usuários (considerando o contexto digital)",
-    "Minha Unidade de Informação precisará mudar seu modo de atuar para se manter útil e ativa no futuro ",
-    "Se a minha Unidade de Informação não mudar sua forma de atender o usuário, ela não irá sobreviver no futuro ",
-    "Até 2030, o modelo de funcionamento da minha Unidade de Informação será totalmente diferente do atual",
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação está totalmente adaptada aos novos comportamentos dos usuários (considerando o contexto digital)</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Minha Unidade de Informação precisará mudar seu modo de atuar para se manter útil e ativa no futuro</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Se a minha Unidade de Informação não mudar sua forma de atender o usuário, ela não irá sobreviver no futuro</div>", unsafe_allow_html=True),
+    st.markdown("<div class='css-fonte'><br>Até 2030, o modelo de funcionamento da minha Unidade de Informação será totalmente diferente do atual</div>", unsafe_allow_html=True)
    
 ]
 
 # Loop para gerar perguntas de escala 0-10
 respostas_escala_2 = {}
 for pergunta in escalas_2:
-    respostas_escala_2[pergunta] = st.slider(pergunta, 0, 10, 2)    
+    respostas_escala_2[pergunta] = st.slider(pergunta, 0, 10, 5,1)    
 
 
+st.markdown("<hr>", unsafe_allow_html=True)
 # Pergunta: Opinião sobre a LITTERACI
 
-var_texto = """<div class='section-subtitle'>Para encerrarmos nossa entrevista, quero apresentar-lhe uma breve descrição de uma potencial solução inovadora para Unidades 
+var_texto = """<div class='css-fonte'>Para encerrarmos nossa entrevista, quero apresentar-lhe uma breve descrição de uma potencial solução inovadora para Unidades 
 de Informação em geral, denominada LITTERACI: <br> A LITTERACI é uma solução pioneira para Unidades de Informação, plataforma que integra diversos 
 tipos de fontes de informação (como catálogos, bases de dados, bibliotecas digitais e repositórios) em uma única interface, 
 tecnologias de Customer Relationship Management (CRM) e Business Intelligence (BI) para aprendizado contínuo e enriquecimento 
@@ -185,6 +188,7 @@ opcoes_litteraci = st.multiselect(
      "Eu e/ou a minha Unidade de Informação estaria disposto(s) a adquirir a solução LITTERACI",
      "Eu e/ou minha Unidade de Informação não tenho interesse em conhecer e/ou adquirir essa solução"]
 )
+
 
 # Pergunta: Feedback final e contato
 feedback = st.text_area("Obrigado por responder a esta pesquisa! Caso queira receber um retorno sobre suas respostas, basta digitar abaixo seu nome e email. Entraremos em contato!")
