@@ -143,7 +143,7 @@ escalas_1 = [
 respostas_escala_1 = {}
 for pergunta in escalas_1:
     st.markdown(pergunta,unsafe_allow_html=True)
-    respostas_escala_1[pergunta] = st.slider("", 0, 10, 5,1)
+    respostas_escala_1[pergunta] = st.slider("", 0, 10, 5)
 
 
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -163,7 +163,7 @@ escalas_2 = [
 respostas_escala_2 = {}
 for pergunta in escalas_2:
     st.markdown(pergunta, unsafe_allow_html=True)
-    respostas_escala_2[pergunta] = st.slider("", 0, 10, 5,1) 
+    respostas_escala_2[pergunta] = st.slider("", 0, 10, 5) 
 
 
 st.markdown("<hr>", unsafe_allow_html=True)
