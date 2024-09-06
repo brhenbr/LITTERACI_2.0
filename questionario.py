@@ -36,6 +36,7 @@ session_id = generate_session_id()
 ######## O Formulário comeca aqui ########
 # Título do formulário
 st.title("Pesquisa de Validação - LITTERACI")
+st.markdown("<h1>Pesquisa de Validação - LITTERACI</h1>",unsafe_allow_html=True)
 
 # Estilo do formulário
 st.markdown(
@@ -49,7 +50,7 @@ st.markdown(
         --button-text-color: #FFFFFF;
         --input-background-color: #FFFFFF;
         --slider-color: #A42593; /* Cor do slider */
-        --question-font-size: 18px; /* Tamanho da fonte das perguntas */        
+        --question-font-size: 16px; /* Tamanho da fonte das perguntas */        
     }
 
     /* Aplicar cores ao fundo e texto */
@@ -76,6 +77,7 @@ st.markdown(
     /* Aumentar o tamanho da fonte das perguntas */
     .css-1d391kg {
         font-size: var(--question-font-size) !important;
+        font-weight: bold;
     }
 
     /* Estilizar o slider */
@@ -106,11 +108,13 @@ st.markdown(
 )
 
 # Adicionar separação e textos para seções
-st.markdown("<div class='section-title'> Olá! Obrigado por aceitar participar desta pesquisa sobre Unidades de Informação (Arquivos, Bibliotecas, Museus)! Responda as perguntas a seguir com base na Unidade de Informação (UI) na qual você trabalha atualmente, ou que atuou nos últimos 5 anos.<br></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'> Olá! Obrigado por aceitar participar desta pesquisa sobre Unidades de Informação (Arquivos, Bibliotecas, Museus)!<br>Responda as perguntas a seguir com base na Unidade de Informação (UI) na qual você trabalha atualmente, ou que atuou nos últimos 5 anos.<br></div>", unsafe_allow_html=True)
+
+titulo = st.markdown("<div class='css-1d391kg'>Tipo de Unidade de Informação (UI) na qual trabalha atualmente, ou que atuou nos últimos 5 anos:<br></div>", unsafe_allow_html=True)
 
 # Perguntas do formulário
 # Pergunta 1: Tipo de Unidade de Informação
-tipo_ui = st.selectbox("Tipo de Unidade de Informação (UI) na qual trabalha atualmente, ou que atuou nos últimos 5 anos:", 
+tipo_ui = st.selectbox(titulo, 
                        ["Arquivo (setor público)", "Arquivo (setor privado)", "Biblioteca (setor público)", 
                         "Biblioteca (setor privado)", "Museu (setor público)", "Museu (setor privado)", 
                         "Outro tipo de Unidade de Informação"])
