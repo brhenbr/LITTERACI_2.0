@@ -216,5 +216,6 @@ if st.button("Enviar respostas"):
     
 
 st.markdown("<hr>", unsafe_allow_html=True)
+st.write(f"Teste: {respostas_escala_2}")
 logo = Image.open('images/logo.png')
 st.image(logo, use_column_width=True)
