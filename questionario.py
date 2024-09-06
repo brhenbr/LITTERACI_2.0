@@ -42,7 +42,7 @@ st.markdown(
     <style>
     /* Forçar modo claro */
     :root {
-        --background-color: #A42593;
+        --background-color: #F9F9F9;
         --text-color: #000000;
         --button-background-color: #2E86C1;
         --button-text-color: #FFFFFF;
@@ -51,7 +51,7 @@ st.markdown(
 
     /* Aplicar cores ao fundo e texto */
     body {
-        background-color: var(--background-color) !important;
+        background-color: #A42593 !important;
         color: var(--text-color) !important;
     }
 
