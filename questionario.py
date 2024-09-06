@@ -196,8 +196,7 @@ opcoes_litteraci = st.multiselect(
 
 st.markdown("<hr>", unsafe_allow_html=True)
 # Pergunta: Feedback final e contato
-st.markdown("<div class='css-fonte'>Obrigado por responder a esta pesquisa! Caso queira receber um retorno sobre suas respostas, basta digitar abaixo seu nome e email. Entraremos em contato!</div>", unsafe_allow_html=True)
-feedback = st.text_area()
+feedback = st.text_area("<div class='css-fonte'>Obrigado por responder a esta pesquisa! Caso queira receber um retorno sobre suas respostas, basta digitar abaixo seu nome e email. Entraremos em contato!</div>", unsafe_allow_html=True)
 
 # Fim do formulário
 
