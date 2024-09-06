@@ -37,27 +37,44 @@ session_id = generate_session_id()
 st.title("Pesquisa de Validação - LITTERACI")
 
 # Estilo do formulário
-st.markdown("""
+st.markdown(
+    """
     <style>
-    .main { 
-        background-color: #FFFFFF;
+    /* Forçar modo claro */
+    :root {
+        --background-color: #F9F9F9;
+        --text-color: #000000;
+        --button-background-color: #2E86C1;
+        --button-text-color: #FFFFFF;
+        --input-background-color: #FFFFFF;
     }
-    h1 {
-        color: #003366;
-        text-align: center;
+
+    /* Aplicar cores ao fundo e texto */
+    body {
+        background-color: var(--background-color) !important;
+        color: var(--text-color) !important;
     }
-    .stButton button {
-        background-color: #FFFFFF;
-        color: #6A0D91;
-        font-size: large;
-        border-radius: 8px;
-        padding: 10px 20px;
+
+    /* Estilizar botões */
+    .css-1d391kg {
+        background-color: var(--button-background-color) !important;
+        color: var(--button-text-color) !important;
     }
-    .stButton button:hover {
-        background-color: #E6E6FA;
+    .css-1d391kg:hover {
+        background-color: #1F618D !important;
+    }
+
+    /* Estilizar caixas de texto e seletores */
+    .stTextInput input {
+        background-color: var(--input-background-color) !important;
+    }
+    .stSelectbox select {
+        background-color: var(--input-background-color) !important;
     }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
 # Perguntas do formulário
 # Pergunta 1: Tipo de Unidade de Informação
