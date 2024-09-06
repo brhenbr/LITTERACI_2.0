@@ -211,7 +211,7 @@ if st.button("Enviar respostas"):
     # Gravar no Google Sheets
     sheet.append_row(respostas_completas)
     
-    st.success("<div class='section-title'>Obrigado por participar da pesquisa!<br></div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Obrigado por participar da pesquisa!<br></div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Suas respostas foram enviadas com sucesso. A LITTERACI agradece a sua colaboração!</div>", unsafe_allow_html=True)
     
 
