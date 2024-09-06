@@ -206,7 +206,7 @@ feedback = st.text_area(" ")
 if st.button("Enviar respostas"):
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    respostas_completas = [timestamp, session_id, tipo_ui] + [", ".join(respostas_escala_1)] + [", ".join(respostas_escala_2)] + [", ".join(opcoes_litteraci), feedback]
+    respostas_completas = [timestamp, session_id, tipo_ui] + [", ".join(list(respostas_escala_1.values()))] + [", ".join(list(respostas_escala_2.values()))] + [", ".join(opcoes_litteraci), feedback]
     
     # Gravar no Google Sheets
     sheet.append_row(respostas_completas)
@@ -216,6 +216,6 @@ if st.button("Enviar respostas"):
     
 
 st.markdown("<hr>", unsafe_allow_html=True)
-st.write(f"Teste: {respostas_escala_2}")
+st.write(f"Teste: {list(respostas_escala_2.values())}")
 logo = Image.open('images/logo.png')
 st.image(logo, use_column_width=True)
