@@ -162,7 +162,7 @@ escalas_2 = [
 # Loop para gerar perguntas de escala 0-10
 respostas_escala_2 = {}
 for pergunta in escalas_2:
-    st.markdown(escalas_2[pergunta], unsafe_allow_html=True))
+    st.markdown(escalas_2[pergunta], unsafe_allow_html=True)
     respostas_escala_2[pergunta] = st.slider("", 0, 10, 5,1)    
 
 
