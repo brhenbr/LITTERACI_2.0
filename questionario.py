@@ -117,4 +117,4 @@ if st.button("Enviar respostas"):
     sheet.append_row(respostas_completas)
     
     st.success("Obrigado por participar da pesquisa!")
-    st.write("Suas respostas foram enviadas com sucesso.")
+    st.write("Suas respostas foram enviadas com sucesso. A LITTERACI agradece a sua colaboração!")
