@@ -106,7 +106,7 @@ st.markdown(
 )
 
 # Adicionar separação e textos para seções
-st.markdown("<div class='section-title'> Olá! Obrigado por aceitar participar desta pesquisa sobre Unidades de Informação (Arquivos, Bibliotecas, Museus)! Responda as perguntas a seguir com base na Unidade de Informação (UI) na qual você trabalha atualmente, ou que atuou nos últimos 5 anos.<BR></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'> Olá! Obrigado por aceitar participar desta pesquisa sobre Unidades de Informação (Arquivos, Bibliotecas, Museus)! Responda as perguntas a seguir com base na Unidade de Informação (UI) na qual você trabalha atualmente, ou que atuou nos últimos 5 anos.<br></div>", unsafe_allow_html=True)
 
 # Perguntas do formulário
 # Pergunta 1: Tipo de Unidade de Informação
