@@ -40,21 +40,21 @@ st.title("Pesquisa de Validação - LITTERACI")
 st.markdown("""
     <style>
     .main { 
-        background-color: #F9F9F9;
+        background-color: #FFFFFF;
     }
     h1 {
-        color: #2E86C1;
+        color: #003366;
         text-align: center;
     }
     .stButton button {
-        background-color: #2E86C1;
-        color: white;
+        background-color: #FFFFFF;
+        color: #6A0D91;
         font-size: large;
         border-radius: 8px;
         padding: 10px 20px;
     }
     .stButton button:hover {
-        background-color: #1F618D;
+        background-color: #E6E6FA;
     }
     </style>
     """, unsafe_allow_html=True)
