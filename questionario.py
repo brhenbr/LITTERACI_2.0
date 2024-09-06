@@ -215,13 +215,10 @@ if st.button("Enviar respostas"):
     # Gravar no Google Sheets
     sheet.append_row(respostas_completas)
     
-    st.markdown("<div class='section-title'>Obrigado por participar da pesquisa!<br></div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>Suas respostas foram enviadas com sucesso. A LITTERACI agradece a sua colaboração!</div>", unsafe_allow_html=True)
+    st.markdown("<h2>Obrigado por participar da pesquisa!<br><h2>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Suas respostas foram enviadas com sucesso.<br> A LITTERACI agradece a sua colaboração!</div>", unsafe_allow_html=True)
     
 
 st.markdown("<hr>", unsafe_allow_html=True)
-respostas_completas = [timestamp, session_id, tipo_ui] + [",".join(map(str,respostas_escala_1))] + [", ".join(map(str,respostas_escala_2))] + [", ".join(opcoes_litteraci), feedback]
-st.write(f"teste1: {respostas_completas}")
-st.write(f"Teste: {respostas_escala_2}")
 logo = Image.open('images/logo.png')
-st.image(logo, use_column_width=True)
+st.image(logo, width=150, use_column_width=True)
