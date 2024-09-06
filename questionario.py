@@ -162,7 +162,6 @@ escalas_2 = [
 ]
 
 # Loop para gerar perguntas de escala 0-10
-idx = 0
 respostas_escala_2 = {}
 for pergunta in escalas_2:
     st.markdown(pergunta, unsafe_allow_html=True)
