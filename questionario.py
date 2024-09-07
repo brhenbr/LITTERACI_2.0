@@ -194,8 +194,10 @@ opcoes_litteraci = [
 ]
 
 respostas_checkbox = {}
+
 for opcao in opcoes_litteraci:
-    respostas_checkbox[opcao] = st.checkbox(opcao)
+#    respostas_checkbox[opcao] = st.checkbox(opcao)
+     st.checkbox(opcao)
 
 # Filtrar as respostas selecionadas
 opcoes_selecionadas_litteraci = [opcao for opcao, selecionado in respostas_checkbox.items() if selecionado]
