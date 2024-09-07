@@ -184,7 +184,7 @@ st.markdown("<h2>Proposta de Solução Inovadora</h2>",unsafe_allow_html=True)
 st.markdown(var_texto, unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
-st.markdown("<div class='css-fonte'>A partir dessa breve descrição da LITTERACI, gostaria de saber qual(is) a(s) sua(s) opinião(ões)?</div>", unsafe_allow_html=True)
+st.markdown("<div class='css-fonte'>A partir dessa breve descrição da LITTERACI, gostaria de saber qual(is) a(s) sua(s) opinião(ões)?<br></div>", unsafe_allow_html=True)
 opcoes_litteraci = [
      "A LITTERACI ajudaria minha Unidade de Informação a se manter atual e ativa",
      "A minha Unidade de Informação precisa dessa solução para aprimorar a sua forma de atendimento ao usuário",
