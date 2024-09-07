@@ -185,14 +185,20 @@ st.markdown(var_texto, unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
 st.markdown("<div class='css-fonte'>A partir dessa breve descrição da LITTERACI, gostaria de saber qual(is) a(s) sua(s) opinião(ões)?</div>", unsafe_allow_html=True)
-opcoes_litteraci = st.multiselect(
-    "",
-    ["A LITTERACI ajudaria minha Unidade de Informação a se manter atual e ativa",
+opcoes_litteraci = [
+     "A LITTERACI ajudaria minha Unidade de Informação a se manter atual e ativa",
      "A minha Unidade de Informação precisa dessa solução para aprimorar a sua forma de atendimento ao usuário",
      "Eu e/ou a minha Unidade de Informação estaria disposto(a) a conhecer com mais detalhes a LITTERACI",
      "Eu e/ou a minha Unidade de Informação estaria disposto(s) a adquirir a solução LITTERACI",
-     "Eu e/ou minha Unidade de Informação não tenho interesse em conhecer e/ou adquirir essa solução"]
-)
+     "Eu e/ou minha Unidade de Informação não tenho interesse em conhecer e/ou adquirir essa solução"
+]
+
+respostas_checkbox = {}
+for opcao in opcoes_litteraci:
+    respostas_checkbox[opcao] = st.checkbox(opcao)
+
+# Filtrar as respostas selecionadas
+opcoes_selecionadas_litteraci = [opcao for opcao, selecionado in respostas_checkbox.items() if selecionado]
 
 st.markdown("<hr>", unsafe_allow_html=True)
 # Pergunta: Feedback final e contato
@@ -210,7 +216,7 @@ respostas_escala_2 = list(respostas_escala_2.values())
 if st.button("Enviar respostas"):
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    respostas_completas = [timestamp, session_id, tipo_ui] + [",".join(map(str,respostas_escala_1))] + [", ".join(map(str,respostas_escala_2))] + [", ".join(opcoes_litteraci), feedback]
+    respostas_completas = [timestamp, session_id, tipo_ui] + [",".join(map(str,respostas_escala_1))] + [", ".join(map(str,respostas_escala_2))] + [", ".join(opcoes_selecionadas_litteraci), feedback]
     
     # Gravar no Google Sheets
     sheet.append_row(respostas_completas)
