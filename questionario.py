@@ -195,9 +195,8 @@ opcoes_litteraci = [
 
 respostas_checkbox = {}
 
-for opcao in opcoes_litteraci:
-     respostas_checkbox[opcao] = st.checkbox(opcao)
-     st.checkbox(opcao)
+for idx, opcao in enumerate(opcoes_litteraci):
+     respostas_checkbox[opcao] = st.checkbox(opcao, key=f"checkbox_{idx}")
 
 # Filtrar as respostas selecionadas
 opcoes_selecionadas_litteraci = [opcao for opcao, selecionado in respostas_checkbox.items() if selecionado]
@@ -214,7 +213,7 @@ respostas_escala_1 = list(respostas_escala_1.values())
 respostas_escala_2 = list(respostas_escala_2.values())
 
 
-for opcao in opcoes_litteraci:
+for opcao in opcoes_selecionadas_litteraci:
      st.write(f"- {opcao}")
 
 
