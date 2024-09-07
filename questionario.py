@@ -223,7 +223,7 @@ if st.button("Enviar respostas"):
     sheet.append_row(respostas_completas)
     
     st.markdown("<h3>Obrigado por participar da pesquisa!<h3>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>Suas respostas foram enviadas com sucesso.<br> A LITTERACI agradece a sua colaboração!</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'; justify-content:center>Suas respostas foram enviadas com sucesso.<br> A LITTERACI agradece a sua colaboração!</div>", unsafe_allow_html=True)
     
 
 st.markdown("<hr>", unsafe_allow_html=True)
