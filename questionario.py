@@ -172,12 +172,12 @@ st.markdown("<hr>", unsafe_allow_html=True)
 # Pergunta: Opinião sobre a LITTERACI
 
 var_texto = """<div class='css-fonte'>Para encerrarmos nossa entrevista, quero apresentar-lhe uma breve descrição de uma potencial solução inovadora para Unidades 
-de Informação em geral, denominada LITTERACI: <br><br> A LITTERACI é uma solução pioneira para Unidades de Informação, plataforma que integra diversos 
+de Informação em geral, denominada <b>LITTERACI</b>: <br><br>A <b>LITTERACI</b> é uma solução pioneira para Unidades de Informação, plataforma que integra diversos 
 tipos de fontes de informação (como catálogos, bases de dados, bibliotecas digitais e repositórios) em uma única interface, 
 tecnologias de Customer Relationship Management (CRM) e Business Intelligence (BI) para aprendizado contínuo e enriquecimento 
 constante do acervo, analytics para monitorar e aprimorar continuamente a precisão e a relevância das buscas, e curadoria personalizada no 
 atendimento de qualquer demanda informacional.<br> Ao integrar a linguagem natural do usuário e a curadoria especializada aos metadados tradicionais, 
-a LITTERACI proporciona uma recuperação mais precisa e relevante dos recursos informacionais, promovendo uma interação mais eficiente e 
+a <b>LITTERACI</b> proporciona uma recuperação mais precisa e relevante dos recursos informacionais, promovendo uma interação mais eficiente e 
 personalizada dos conteúdos disponíveis.</div>"""
 
 st.markdown("<h2>Proposta de Solução Inovadora</h2>",unsafe_allow_html=True)
@@ -208,22 +208,16 @@ feedback = st.text_area(" ")
 
 # Fim do formulário
 
-#Transforma dicionario em lists
+#Transforma dicionario em listas
 respostas_escala_1 = list(respostas_escala_1.values())
 respostas_escala_2 = list(respostas_escala_2.values())
-
-
-for opcao in opcoes_selecionadas_litteraci:
-     st.write(f"- {opcao}")
-
-
 
 # Submissão do formulário
 # Botão de envio
 if st.button("Enviar respostas"):
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    respostas_completas = [timestamp, session_id, tipo_ui] + [",".join(map(str,respostas_escala_1))] + [", ".join(map(str,respostas_escala_2))] + [", ".join(opcoes_selecionadas_litteraci), feedback]
+    respostas_completas = [timestamp, session_id, tipo_ui] + [";".join(map(str,respostas_escala_1))] + [";".join(map(str,respostas_escala_2))] + [";".join(opcoes_selecionadas_litteraci), feedback]
     
     # Gravar no Google Sheets
     sheet.append_row(respostas_completas)
