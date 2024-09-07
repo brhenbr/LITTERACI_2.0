@@ -196,7 +196,7 @@ opcoes_litteraci = [
 respostas_checkbox = {}
 
 for opcao in opcoes_litteraci:
-#    respostas_checkbox[opcao] = st.checkbox(opcao)
+     respostas_checkbox[opcao] = st.checkbox(opcao)
      st.checkbox(opcao)
 
 # Filtrar as respostas selecionadas
@@ -212,6 +212,12 @@ feedback = st.text_area(" ")
 #Transforma dicionario em lists
 respostas_escala_1 = list(respostas_escala_1.values())
 respostas_escala_2 = list(respostas_escala_2.values())
+
+
+for opcao in opcoes_litteraci:
+     st.write(f"- {opcao}")
+
+
 
 # Submissão do formulário
 # Botão de envio
