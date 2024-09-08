@@ -3,6 +3,7 @@ import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import plotly.express as px
+import plotly.figure_factory as ff
 from PIL import Image
 import io
 import base64
@@ -93,22 +94,22 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     if i % 3 == 1:
         with col1:
             st.subheader(f"Pergunta {i}")
-            fig = px.histogram(situacao_atual_data[i], nbins=10, title=pergunta)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
+            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False)
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade", hovermode="x")
             fig.add_vline(x=situacao_atual_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_atual_data[i].mean():.2f}")
             st.plotly_chart(fig)
     elif i % 3 == 2:
         with col2:
             st.subheader(f"Pergunta {i}")
-            fig = px.histogram(situacao_atual_data[i], nbins=10, title=pergunta)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
+            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False)
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade", hovermode="x")
             fig.add_vline(x=situacao_atual_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_atual_data[i].mean():.2f}")
             st.plotly_chart(fig)
     else:
         with col3:
             st.subheader(f"Pergunta {i}")
-            fig = px.histogram(situacao_atual_data[i], nbins=10, title=pergunta)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
+            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False)
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade", hovermode="x")
             fig.add_vline(x=situacao_atual_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_atual_data[i].mean():.2f}")
             st.plotly_chart(fig)
 
@@ -127,15 +128,15 @@ for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
     if i % 2 == 1:
         with col1:
             st.subheader(f"Pergunta {i}")
-            fig = px.histogram(situacao_futura_data[i], nbins=10, title=pergunta)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
+            fig = ff.create_distplot([situacao_futura_data[i]], [pergunta], bin_size=1, show_rug=False)
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade", hovermode="x")
             fig.add_vline(x=situacao_futura_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_futura_data[i].mean():.2f}")
             st.plotly_chart(fig)
     else:
         with col2:
             st.subheader(f"Pergunta {i}")
-            fig = px.histogram(situacao_futura_data[i], nbins=10, title=pergunta)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
+            fig = ff.create_distplot([situacao_futura_data[i]], [pergunta], bin_size=1, show_rug=False)
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade", hovermode="x")
             fig.add_vline(x=situacao_futura_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_futura_data[i].mean():.2f}")
             st.plotly_chart(fig)
 
@@ -159,7 +160,7 @@ def download_csv(df, filename):
     href = f'<a href="data:file/csv;base64,{b64}" download="{filename}">Download CSV</a>'
     return href
 
-contato_df = df[["Timestamp", "Dados Contato"]]
+contato_df = df[["Dados Contato"]]
 csv_download_link = download_csv(contato_df, "dados_contato.csv")
 st.markdown(csv_download_link, unsafe_allow_html=True)
 
