@@ -10,10 +10,10 @@ def generate_timestamp():
     )
 
 def generate_situacao_atual():
-    return [random.randint(1, 7) for _ in range(13)]
+    return [str(random.randint(1, 10)) for _ in range(13)]
 
 def generate_situacao_futura():
-    return [random.randint(5, 10) for _ in range(4)]
+    return [str(random.randint(4, 10)) for _ in range(4)]
 
 def generate_opinioes():
     opinioes = [
@@ -24,41 +24,46 @@ def generate_opinioes():
     ]
     return ";".join(random.sample(opinioes, k=random.randint(1, 4)))
 
-def generate_data(num_entries, ui_type):
+def generate_data(num_entries, ui_types):
     data = []
     for i in range(num_entries):
-        entry = {
-            "TimeStamp": generate_timestamp().strftime("%Y-%m-%d %H:%M:%S"),
-            "Origin": f"user{i+1}",
-            "Tipo de UI": ui_type,
-            "Situacao Atual UI": ";".join(map(str, generate_situacao_atual())),
-            "Situacao Futura UI": ";".join(map(str, generate_situacao_futura())),
-            "Opinioes UI": generate_opinioes(),
-            "Dados Contato": f"user{i+1}@example.com"
-        }
+        ui_type = random.choice(ui_types)
+        entry = [
+            generate_timestamp().strftime("%Y-%m-%d %H:%M:%S"),
+            f"user{i+1}",
+            ui_type,
+            ";".join(generate_situacao_atual()),
+            ";".join(generate_situacao_futura()),
+            generate_opinioes(),
+            f"user{i+1}@example.com" if random.random() > 0.1 else ""  # 10% chance of empty email
+        ]
         data.append(entry)
     return data
 
+# Tipos de UI
+ui_types = [
+    "Biblioteca (setor público)",
+    "Biblioteca (setor privado)",
+    "Arquivo (setor público)",
+    "Arquivo (setor privado)",
+    "Museu (setor público)",
+    "Museu (setor privado)",
+    "Outro tipo de Unidade de Informação"
+]
+
 # Gerar dados
 data = []
-data.extend(generate_data(500, "Biblioteca (setor público)"))
-data.extend(generate_data(500, "Biblioteca (setor privado)"))
-data.extend(generate_data(100, "Arquivo (setor público)"))
-data.extend(generate_data(100, "Arquivo (setor privado)"))
-data.extend(generate_data(100, "Museu (setor público)"))
-data.extend(generate_data(100, "Museu (setor privado)"))
-data.extend(generate_data(100, "Outro tipo de Unidade de Informação"))
+data.extend(generate_data(1000, ui_types[:2]))  # 1000 entradas para bibliotecas
+for ui_type in ui_types[2:]:
+    data.extend(generate_data(100, [ui_type]))  # 100 entradas para cada outro tipo de UI
 
 # Embaralhar os dados
 random.shuffle(data)
 
 # Escrever dados em um arquivo CSV
 with open("dados_teste_litteraci.csv", "w", newline="", encoding="utf-8") as csvfile:
-    fieldnames = ["TimeStamp", "Origin", "Tipo de UI", "Situacao Atual UI", "Situacao Futura UI", "Opinioes UI", "Dados Contato"]
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    
-    writer.writeheader()
-    for row in data:
-        writer.writerow(row)
+    writer = csv.writer(csvfile)
+    writer.writerow(["TimeStamp", "Origin", "Tipo de UI", "Situacao Atual UI", "Situacao Futura UI", "Opinioes UI", "Dados Contato"])
+    writer.writerows(data)
 
 print("Arquivo 'dados_teste_litteraci.csv' gerado com sucesso!")
