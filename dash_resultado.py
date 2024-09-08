@@ -132,21 +132,30 @@ col1, col2, col3 = st.columns(3)
 for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     if i % 3 == 1:
         with col1:
-            fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
-            st.plotly_chart(fig)
+            if len(filtered_situacao_atual[i]) > 0:
+                fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
+                fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
+                st.plotly_chart(fig)
+            else:
+                st.warning(f"Não há dados suficientes para exibir o gráfico da Pergunta {i}.")
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     elif i % 3 == 2:
         with col2:
-            fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
-            st.plotly_chart(fig)
+            if len(filtered_situacao_atual[i]) > 0:
+                fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
+                fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
+                st.plotly_chart(fig)
+            else:
+                st.warning(f"Não há dados suficientes para exibir o gráfico da Pergunta {i}.")
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     else:
         with col3:
-            fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
-            st.plotly_chart(fig)
+            if len(filtered_situacao_atual[i]) > 0:
+                fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
+                fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
+                st.plotly_chart(fig)
+            else:
+                st.warning(f"Não há dados suficientes para exibir o gráfico da Pergunta {i}.")
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
 
 # Situação Futura
@@ -163,15 +172,21 @@ col1, col2 = st.columns(2)
 for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
     if i % 2 == 1:
         with col1:
-            fig = ff.create_distplot([filtered_situacao_futura[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
-            st.plotly_chart(fig)
+            if len(filtered_situacao_futura[i]) > 0:
+                fig = ff.create_distplot([filtered_situacao_futura[i]], [pergunta], bin_size=1, show_rug=False)
+                fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
+                st.plotly_chart(fig)
+            else:
+                st.warning(f"Não há dados suficientes para exibir o gráfico da Pergunta {i}.")
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     else:
         with col2:
-            fig = ff.create_distplot([filtered_situacao_futura[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
-            st.plotly_chart(fig)
+            if len(filtered_situacao_futura[i]) > 0:
+                fig = ff.create_distplot([filtered_situacao_futura[i]], [pergunta], bin_size=1, show_rug=False)
+                fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
+                st.plotly_chart(fig)
+            else:
+                st.warning(f"Não há dados suficientes para exibir o gráfico da Pergunta {i}.")
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
 
 # Opiniões sobre a LITTERACI
