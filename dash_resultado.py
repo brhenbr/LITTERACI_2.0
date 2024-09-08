@@ -224,7 +224,7 @@ def download_csv(df, filename):
 
 contato_df = filtered_df[["Dados Contato"]]
 csv_download_link = download_csv(contato_df, "dados_contato.csv")
-st.download_button("Download CSV", csv_download_link, "dados_contato.csv")
+st.markdown(csv_download_link, unsafe_allow_html=True)
 
 # Conclusão
 st.header("Conclusão")
