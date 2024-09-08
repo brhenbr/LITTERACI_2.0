@@ -3,7 +3,6 @@ import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import plotly.express as px
-import plotly.figure_factory as ff
 from PIL import Image
 import io
 import base64
@@ -133,7 +132,7 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     if i % 3 == 1:
         with col1:
             if len(filtered_situacao_atual[i]) > 0:
-                fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
+                fig = px.histogram(filtered_situacao_atual[i], x=filtered_situacao_atual[i], nbins=10, title=pergunta)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -142,7 +141,7 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     elif i % 3 == 2:
         with col2:
             if len(filtered_situacao_atual[i]) > 0:
-                fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
+                fig = px.histogram(filtered_situacao_atual[i], x=filtered_situacao_atual[i], nbins=10, title=pergunta)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -151,7 +150,7 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     else:
         with col3:
             if len(filtered_situacao_atual[i]) > 0:
-                fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
+                fig = px.histogram(filtered_situacao_atual[i], x=filtered_situacao_atual[i], nbins=10, title=pergunta)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -173,7 +172,7 @@ for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
     if i % 2 == 1:
         with col1:
             if len(filtered_situacao_futura[i]) > 0:
-                fig = ff.create_distplot([filtered_situacao_futura[i]], [pergunta], bin_size=1, show_rug=False)
+                fig = px.histogram(filtered_situacao_futura[i], x=filtered_situacao_futura[i], nbins=10, title=pergunta)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -182,7 +181,7 @@ for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
     else:
         with col2:
             if len(filtered_situacao_futura[i]) > 0:
-                fig = ff.create_distplot([filtered_situacao_futura[i]], [pergunta], bin_size=1, show_rug=False)
+                fig = px.histogram(filtered_situacao_futura[i], x=filtered_situacao_futura[i], nbins=10, title=pergunta)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
