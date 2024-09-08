@@ -66,6 +66,10 @@ st.markdown(
     .opiniao-table tr:nth-child(even) {
         background-color: #E6E6E6;
     }
+    [data-testid="stSidebar"] {
+        min-width: 300px;
+        max-width: 300px;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -77,14 +81,16 @@ st.sidebar.image('images/logo.png', use_column_width=True)
 # Filtro por tipo de UI
 st.sidebar.title("Filtro")
 tipo_ui_options = df["Tipo de UI"].unique()
-default_selection = ["Biblioteca do setor público"]
-selected_ui_types = st.sidebar.multiselect("Selecione o tipo de UI", options=tipo_ui_options, default=default_selection)
+selected_ui_types = []
+for ui_type in tipo_ui_options:
+    if st.sidebar.checkbox(ui_type, key=f"checkbox_{ui_type}"):
+        selected_ui_types.append(ui_type)
 
 # Aplicar filtro
 if not selected_ui_types:
-    filtered_df = df
-    filtered_situacao_atual = situacao_atual_data
-    filtered_situacao_futura = situacao_futura_data
+    filtered_df = pd.DataFrame()  # DataFrame vazio
+    filtered_situacao_atual = pd.DataFrame()  # DataFrame vazio
+    filtered_situacao_futura = pd.DataFrame()  # DataFrame vazio
 else:
     filtered_df = df[df["Tipo de UI"].isin(selected_ui_types)]
     filtered_situacao_atual = situacao_atual_data[df["Tipo de UI"].isin(selected_ui_types)].reset_index(drop=True)
