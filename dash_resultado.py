@@ -45,7 +45,6 @@ st.markdown(
         --font-size-title: 28px;
         --font-size-subtitle: 20px;
     }
-    /* Resto do CSS... */
     .pergunta {
         font-weight: bold;
         font-size: 18px;
@@ -68,26 +67,22 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Logo
-col1, col2 = st.columns([1, 4])
-with col1:
-    logo = Image.open('images/logo.png')
-    st.image(logo, width=100)
-    st.empty()  # Espaço vazio para manter o logo fixo
+# Configuração para manter a barra lateral sempre visível
+st.set_page_config(initial_sidebar_state="expanded", layout="wide")
 
-# Título do dashboard
-st.title("Análise das Respostas da Pesquisa LITTERACI")
-
-# Introdução
-st.write("Bem-vindo ao dashboard de análise das respostas da pesquisa LITTERACI! Aqui, você encontrará insights valiosos sobre a situação atual e futura das Unidades de Informação (UIs), bem como as opiniões dos participantes sobre a solução inovadora LITTERACI.")
+# Logo no menu lateral
+st.sidebar.image('images/logo.png', width=200)
 
 # Filtro por tipo de UI
 st.sidebar.title("Filtro")
-tipo_ui_options = ["Todas"] + list(df["Tipo de UI"].unique())
-selected_ui_types = st.sidebar.multiselect("Selecione o tipo de UI", options=tipo_ui_options, default=["Todas"])
+tipo_ui_options = df["Tipo de UI"].unique()
+selected_ui_types = []
+for ui_type in tipo_ui_options:
+    if st.sidebar.checkbox(ui_type, key=f"checkbox_{ui_type}"):
+        selected_ui_types.append(ui_type)
 
 # Aplicar filtro
-if "Todas" in selected_ui_types:
+if not selected_ui_types:
     filtered_df = df
     filtered_situacao_atual = situacao_atual_data
     filtered_situacao_futura = situacao_futura_data
@@ -95,6 +90,12 @@ else:
     filtered_df = df[df["Tipo de UI"].isin(selected_ui_types)]
     filtered_situacao_atual = situacao_atual_data[df["Tipo de UI"].isin(selected_ui_types)].reset_index(drop=True)
     filtered_situacao_futura = situacao_futura_data[df["Tipo de UI"].isin(selected_ui_types)].reset_index(drop=True)
+
+# Título do dashboard
+st.title("Análise das Respostas da Pesquisa LITTERACI")
+
+# Introdução
+st.write("Bem-vindo ao dashboard de análise das respostas da pesquisa LITTERACI! Aqui, você encontrará insights valiosos sobre a situação atual e futura das Unidades de Informação (UIs), bem como as opiniões dos participantes sobre a solução inovadora LITTERACI.")
 
 # Visão Geral
 st.header("Visão Geral")
@@ -133,7 +134,7 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     if col == 1:
         with col1:
             if not filtered_situacao_atual[f'Q{i}'].empty:
-                fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10, title=pergunta)
+                fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -142,7 +143,7 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     elif col == 2:
         with col2:
             if not filtered_situacao_atual[f'Q{i}'].empty:
-                fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10, title=pergunta)
+                fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -151,7 +152,7 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     else:
         with col3:
             if not filtered_situacao_atual[f'Q{i}'].empty:
-                fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10, title=pergunta)
+                fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -174,7 +175,7 @@ for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
     if col == 1:
         with col1:
             if not filtered_situacao_futura[f'Q{i}'].empty:
-                fig = px.histogram(filtered_situacao_futura, x=f'Q{i}', nbins=10, title=pergunta)
+                fig = px.histogram(filtered_situacao_futura, x=f'Q{i}', nbins=10)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -183,7 +184,7 @@ for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
     else:
         with col2:
             if not filtered_situacao_futura[f'Q{i}'].empty:
-                fig = px.histogram(filtered_situacao_futura, x=f'Q{i}', nbins=10, title=pergunta)
+                fig = px.histogram(filtered_situacao_futura, x=f'Q{i}', nbins=10)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
