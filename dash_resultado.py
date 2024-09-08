@@ -213,18 +213,18 @@ else:
     st.warning("Não há dados suficientes para exibir as opiniões sobre a Solução LITTERACI.")
 
 # Download dos dados de contato
-st.header("Dados de Contato")
-st.write("Clique no botão abaixo para baixar os dados de contato dos participantes em um arquivo CSV.")
+#st.header("Dados de Contato")
+#st.write("Clique no botão abaixo para baixar os dados de contato dos participantes em um arquivo CSV.")
 
-def download_csv(df, filename):
-    csv = df.to_csv(index=False)
-    b64 = base64.b64encode(csv.encode()).decode()
-    href = f'<a href="data:file/csv;base64,{b64}" download="{filename}">Download CSV</a>'
-    return href
+#def download_csv(df, filename):
+#    csv = df.to_csv(index=False)
+#    b64 = base64.b64encode(csv.encode()).decode()
+#    href = f'<a href="data:file/csv;base64,{b64}" download="{filename}">Download CSV</a>'
+#    return href
 
-contato_df = df[["Dados Contato"]]
-csv_download_link = download_csv(contato_df, "dados_contato.csv")
-st.markdown(csv_download_link, unsafe_allow_html=True)
+#contato_df = df[["Dados Contato"]]
+#csv_download_link = download_csv(contato_df, "dados_contato.csv")
+#st.markdown(csv_download_link, unsafe_allow_html=True)
 
 # Conclusão
 st.header("Conclusão")
