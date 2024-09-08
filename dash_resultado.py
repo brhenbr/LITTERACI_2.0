@@ -219,15 +219,15 @@ st.write("Clique no botão abaixo para baixar os dados de contato dos participan
 def download_csv(df, filename):
     csv = df.to_csv(index=False)
     b64 = base64.b64encode(csv.encode()).decode()
-    return b64
-
+    href = f'<a href="data:file/csv;base64,{b64}" download="{filename}">Download CSV</a>'
+    return href
 
 
 if not filtered_df.empty:
     contato_df = filtered_df[["Dados Contato"]]
     csv_download_link = download_csv(contato_df, "dados_contato.csv")
     st.download_button("Download CSV", csv_download_link, "dados_contato.csv")
-    
+
 else:
     st.warning("Não há dados de contato disponíveis para download.")
 
