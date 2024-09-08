@@ -1,4 +1,8 @@
 import streamlit as st
+
+# Configuração da página (deve ser a primeira chamada Streamlit)
+st.set_page_config(page_title="Dashboard LITTERACI", layout="wide", initial_sidebar_state="expanded")
+
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -66,9 +70,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# Configuração para manter a barra lateral sempre visível
-st.set_page_config(initial_sidebar_state="expanded", layout="wide")
 
 # Logo no menu lateral
 st.sidebar.image('images/logo.png', width=200)
@@ -213,7 +214,7 @@ def download_csv(df, filename):
 
 contato_df = filtered_df[["Dados Contato"]]
 csv_download_link = download_csv(contato_df, "dados_contato.csv")
-st.download_button("Download CSV", csv_download_link, "dados_contato.csv")
+st.download_button("Download CSV", data=csv_download_link, file_name="dados_contato.csv", mime="text/csv")
 
 # Conclusão
 st.header("Conclusão")
