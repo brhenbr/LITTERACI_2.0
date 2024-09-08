@@ -47,6 +47,23 @@ st.markdown(
         --font-size-subtitle: 20px;
     }
     /* Resto do CSS... */
+    .pergunta {
+        font-weight: bold;
+        font-size: 18px;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .opiniao-table {
+        background-color: #F2F2F2;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    .opiniao-table td {
+        padding: 8px;
+    }
+    .opiniao-table tr:nth-child(even) {
+        background-color: #E6E6E6;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -93,25 +110,22 @@ col1, col2, col3 = st.columns(3)
 for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     if i % 3 == 1:
         with col1:
-            st.markdown(f'<div title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
-            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade")
-            fig.add_vline(x=situacao_atual_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_atual_data[i].mean():.2f}")
+            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False, show_curve=False)
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
             st.plotly_chart(fig)
+            st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     elif i % 3 == 2:
         with col2:
-            st.markdown(f'<div title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
-            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade")
-            fig.add_vline(x=situacao_atual_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_atual_data[i].mean():.2f}")
+            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False, show_curve=False)
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
             st.plotly_chart(fig)
+            st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     else:
         with col3:
-            st.markdown(f'<div title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
-            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade")
-            fig.add_vline(x=situacao_atual_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_atual_data[i].mean():.2f}")
+            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False, show_curve=False)
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
             st.plotly_chart(fig)
+            st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
 
 # Situação Futura
 st.header("Perspectivas para o Futuro das Unidades de Informação")
@@ -127,18 +141,16 @@ col1, col2 = st.columns(2)
 for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
     if i % 2 == 1:
         with col1:
-            st.markdown(f'<div title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
-            fig = ff.create_distplot([situacao_futura_data[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade")
-            fig.add_vline(x=situacao_futura_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_futura_data[i].mean():.2f}")
+            fig = ff.create_distplot([situacao_futura_data[i]], [pergunta], bin_size=1, show_rug=False, show_curve=False)
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
             st.plotly_chart(fig)
+            st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     else:
         with col2:
-            st.markdown(f'<div title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
-            fig = ff.create_distplot([situacao_futura_data[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade")
-            fig.add_vline(x=situacao_futura_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_futura_data[i].mean():.2f}")
+            fig = ff.create_distplot([situacao_futura_data[i]], [pergunta], bin_size=1, show_rug=False, show_curve=False)
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
             st.plotly_chart(fig)
+            st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
 
 # Opiniões sobre a LITTERACI
 st.header("Opiniões sobre a Solução LITTERACI")
@@ -162,7 +174,7 @@ def download_csv(df, filename):
 
 contato_df = df[["Dados Contato"]]
 csv_download_link = download_csv(contato_df, "dados_contato.csv")
-st.markdown(csv_download_link, unsafe_allow_html=True)
+st.download_button("Download CSV", csv_download_link, "dados_contato.csv")
 
 # Conclusão
 st.header("Conclusão")
@@ -172,7 +184,7 @@ st.write("Esperamos que este dashboard tenha proporcionado uma visão clara e en
 
 # Rodapé
 st.markdown("---")
-st.write("Dashboard desenvolvido por [Seu Nome] | Powered by Streamlit")
+st.write("Dashboard desenvolvido por LITTERACI | Powered by Streamlit")
 
 # Logo
 logo = Image.open('images/logo.png')
