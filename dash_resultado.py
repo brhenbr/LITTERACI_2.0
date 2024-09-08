@@ -222,9 +222,9 @@ def download_csv(df, filename):
     href = f'<a href="data:file/csv;base64,{b64}" download="{filename}">Download CSV</a>'
     return href
 
-contato_df = filtered_df[["Dados Contato"]]
+contato_df = df[["Dados Contato"]]
 csv_download_link = download_csv(contato_df, "dados_contato.csv")
-st.download_button("Download CSV", csv_download_link, "dados_contato.csv")
+st.markdown(csv_download_link, unsafe_allow_html=True)
 
 # Conclusão
 st.header("Conclusão")
