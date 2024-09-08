@@ -93,23 +93,23 @@ col1, col2, col3 = st.columns(3)
 for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     if i % 3 == 1:
         with col1:
-            st.subheader(f"Pergunta {i}")
+            st.markdown(f'<div title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
             fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade", hovermode="x")
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade")
             fig.add_vline(x=situacao_atual_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_atual_data[i].mean():.2f}")
             st.plotly_chart(fig)
     elif i % 3 == 2:
         with col2:
-            st.subheader(f"Pergunta {i}")
+            st.markdown(f'<div title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
             fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade", hovermode="x")
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade")
             fig.add_vline(x=situacao_atual_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_atual_data[i].mean():.2f}")
             st.plotly_chart(fig)
     else:
         with col3:
-            st.subheader(f"Pergunta {i}")
+            st.markdown(f'<div title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
             fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade", hovermode="x")
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade")
             fig.add_vline(x=situacao_atual_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_atual_data[i].mean():.2f}")
             st.plotly_chart(fig)
 
@@ -127,16 +127,16 @@ col1, col2 = st.columns(2)
 for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
     if i % 2 == 1:
         with col1:
-            st.subheader(f"Pergunta {i}")
+            st.markdown(f'<div title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
             fig = ff.create_distplot([situacao_futura_data[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade", hovermode="x")
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade")
             fig.add_vline(x=situacao_futura_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_futura_data[i].mean():.2f}")
             st.plotly_chart(fig)
     else:
         with col2:
-            st.subheader(f"Pergunta {i}")
+            st.markdown(f'<div title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
             fig = ff.create_distplot([situacao_futura_data[i]], [pergunta], bin_size=1, show_rug=False)
-            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade", hovermode="x")
+            fig.update_layout(xaxis_title="Nota", yaxis_title="Densidade")
             fig.add_vline(x=situacao_futura_data[i].mean(), line_width=2, line_dash="dash", line_color="red", annotation_text=f"Média: {situacao_futura_data[i].mean():.2f}")
             st.plotly_chart(fig)
 
