@@ -5,3 +5,4 @@ uuid
 datetime
 pandas
 plotly.express
+wordcloud
