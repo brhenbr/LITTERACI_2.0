@@ -69,6 +69,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Logo
+col1, col2 = st.columns([1, 4])
+with col1:
+    logo = Image.open('images/logo.png')
+    st.image(logo, width=100)
+    st.empty()  # Espaço vazio para manter o logo fixo
+
 # Título do dashboard
 st.title("Análise das Respostas da Pesquisa LITTERACI")
 
@@ -85,7 +92,18 @@ st.subheader("Tipos de Unidades de Informação")
 tipo_ui_counts = df["Tipo de UI"].value_counts()
 fig_tipo_ui = px.pie(tipo_ui_counts, values=tipo_ui_counts, names=tipo_ui_counts.index, title="Distribuição dos Tipos de UI")
 fig_tipo_ui.update_layout(title_font=dict(size=20))
-st.plotly_chart(fig_tipo_ui)
+selected_ui = st.plotly_chart(fig_tipo_ui, use_container_width=True)
+
+# Filtro por tipo de UI selecionado
+if selected_ui:
+    selected_ui_type = selected_ui['data'][0]['labels'][selected_ui['data'][0]['id']]
+    filtered_df = df[df["Tipo de UI"] == selected_ui_type]
+    filtered_situacao_atual = situacao_atual_data[df["Tipo de UI"] == selected_ui_type]
+    filtered_situacao_futura = situacao_futura_data[df["Tipo de UI"] == selected_ui_type]
+else:
+    filtered_df = df
+    filtered_situacao_atual = situacao_atual_data
+    filtered_situacao_futura = situacao_futura_data
 
 # Situação Atual
 st.header("Situação Atual das Unidades de Informação")
@@ -110,19 +128,19 @@ col1, col2, col3 = st.columns(3)
 for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     if i % 3 == 1:
         with col1:
-            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False, show_curve=False)
+            fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
             fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
             st.plotly_chart(fig)
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     elif i % 3 == 2:
         with col2:
-            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False, show_curve=False)
+            fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
             fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
             st.plotly_chart(fig)
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     else:
         with col3:
-            fig = ff.create_distplot([situacao_atual_data[i]], [pergunta], bin_size=1, show_rug=False, show_curve=False)
+            fig = ff.create_distplot([filtered_situacao_atual[i]], [pergunta], bin_size=1, show_rug=False)
             fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
             st.plotly_chart(fig)
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
@@ -141,13 +159,13 @@ col1, col2 = st.columns(2)
 for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
     if i % 2 == 1:
         with col1:
-            fig = ff.create_distplot([situacao_futura_data[i]], [pergunta], bin_size=1, show_rug=False, show_curve=False)
+            fig = ff.create_distplot([filtered_situacao_futura[i]], [pergunta], bin_size=1, show_rug=False)
             fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
             st.plotly_chart(fig)
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     else:
         with col2:
-            fig = ff.create_distplot([situacao_futura_data[i]], [pergunta], bin_size=1, show_rug=False, show_curve=False)
+            fig = ff.create_distplot([filtered_situacao_futura[i]], [pergunta], bin_size=1, show_rug=False)
             fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
             st.plotly_chart(fig)
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
@@ -155,7 +173,7 @@ for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
 # Opiniões sobre a LITTERACI
 st.header("Opiniões sobre a Solução LITTERACI")
 
-opcoes_litteraci = df["Opinioes UI"].str.split(";", expand=True).stack()
+opcoes_litteraci = filtered_df["Opinioes UI"].str.split(";", expand=True).stack()
 opcoes_litteraci = opcoes_litteraci[opcoes_litteraci != ""]
 opiniao_counts = opcoes_litteraci.value_counts()
 
@@ -172,7 +190,7 @@ def download_csv(df, filename):
     href = f'<a href="data:file/csv;base64,{b64}" download="{filename}">Download CSV</a>'
     return href
 
-contato_df = df[["Dados Contato"]]
+contato_df = filtered_df[["Dados Contato"]]
 csv_download_link = download_csv(contato_df, "dados_contato.csv")
 st.download_button("Download CSV", csv_download_link, "dados_contato.csv")
 
@@ -185,7 +203,3 @@ st.write("Esperamos que este dashboard tenha proporcionado uma visão clara e en
 # Rodapé
 st.markdown("---")
 st.write("Dashboard desenvolvido por LITTERACI | Powered by Streamlit")
-
-# Logo
-logo = Image.open('images/logo.png')
-st.image(logo, width=150, use_column_width=True)
