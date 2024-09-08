@@ -10,10 +10,10 @@ def generate_timestamp():
     )
 
 def generate_situacao_atual():
-    return [str(random.randint(1, 10)) for _ in range(13)]
+    return '"' + ";".join(str(random.randint(1, 10)) for _ in range(13)) + '"'
 
 def generate_situacao_futura():
-    return [str(random.randint(4, 10)) for _ in range(4)]
+    return '"' + ";".join(str(random.randint(4, 10)) for _ in range(4)) + '"'
 
 def generate_opinioes():
     opinioes = [
@@ -32,8 +32,8 @@ def generate_data(num_entries, ui_types):
             generate_timestamp().strftime("%Y-%m-%d %H:%M:%S"),
             f"user{i+1}",
             ui_type,
-            ";".join(generate_situacao_atual()),
-            ";".join(generate_situacao_futura()),
+            generate_situacao_atual(),
+            generate_situacao_futura(),
             generate_opinioes(),
             f"user{i+1}@example.com" if random.random() > 0.1 else ""  # 10% chance of empty email
         ]
@@ -62,7 +62,7 @@ random.shuffle(data)
 
 # Escrever dados em um arquivo CSV
 with open("dados_teste_litteraci.csv", "w", newline="", encoding="utf-8") as csvfile:
-    writer = csv.writer(csvfile)
+    writer = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
     writer.writerow(["TimeStamp", "Origin", "Tipo de UI", "Situacao Atual UI", "Situacao Futura UI", "Opinioes UI", "Dados Contato"])
     writer.writerows(data)
 
