@@ -5,6 +5,5 @@ uuid
 datetime
 pandas
 plotly.express
-wordcloud
 io
 base64
