@@ -3,6 +3,7 @@ import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import plotly.express as px
+from PIL import Image
 
 # Configuração do acesso ao Google Sheets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -72,21 +73,39 @@ tipo_ui_counts = filtered_df["Tipo de UI"].value_counts()
 fig_tipo_ui = px.pie(tipo_ui_counts, values=tipo_ui_counts, names=tipo_ui_counts.index, title="Distribuição dos Tipos de UI")
 st.plotly_chart(fig_tipo_ui)
 
-# Gráficos de barras - Situação Atual
+# Grid de gráficos - Situação Atual
 st.header("Situação Atual")
 situacao_atual_cols = [f"Situacao Atual UI_{i+1}" for i in range(len(filtered_situacao_atual.columns))]
-for i, col in enumerate(situacao_atual_cols, start=1):
-    st.subheader(f"Pergunta {i}")
-    fig = px.bar(filtered_situacao_atual, x=filtered_situacao_atual.index, y=col)
-    st.plotly_chart(fig)
+st.subheader("Médias das respostas")
+col1, col2, col3 = st.columns(3)
+for i, col in enumerate(situacao_atual_cols):
+    if i % 3 == 0:
+        with col1:
+            avg_score = filtered_situacao_atual[col].mean().round(2)
+            st.metric(label=f"Pergunta {i+1}", value=avg_score)
+    elif i % 3 == 1:
+        with col2:
+            avg_score = filtered_situacao_atual[col].mean().round(2)
+            st.metric(label=f"Pergunta {i+1}", value=avg_score)
+    else:
+        with col3:
+            avg_score = filtered_situacao_atual[col].mean().round(2)
+            st.metric(label=f"Pergunta {i+1}", value=avg_score)
 
-# Gráficos de barras - Situação Futura  
+# Grid de gráficos - Situação Futura
 st.header("Situação Futura")
 situacao_futura_cols = [f"Situacao Futura UI_{i+1}" for i in range(len(filtered_situacao_futura.columns))]
-for i, col in enumerate(situacao_futura_cols, start=1):
-    st.subheader(f"Pergunta {i}")
-    fig = px.bar(filtered_situacao_futura, x=filtered_situacao_futura.index, y=col)
-    st.plotly_chart(fig)
+st.subheader("Médias das respostas")
+col1, col2 = st.columns(2)
+for i, col in enumerate(situacao_futura_cols):
+    if i % 2 == 0:
+        with col1:
+            avg_score = filtered_situacao_futura[col].mean().round(2)
+            st.metric(label=f"Pergunta {i+1}", value=avg_score)
+    else:
+        with col2:
+            avg_score = filtered_situacao_futura[col].mean().round(2)
+            st.metric(label=f"Pergunta {i+1}", value=avg_score)
 
 # Opiniões sobre a LITTERACI
 st.header("Opiniões sobre a LITTERACI")
@@ -94,9 +113,9 @@ opcoes_litteraci = filtered_df["Opinioes UI"].str.split(";", expand=True).apply(
 opcoes_litteraci = opcoes_litteraci[opcoes_litteraci != ""]
 opiniao_counts = opcoes_litteraci.value_counts()
 
-fig_opiniao = px.bar(opiniao_counts, x=opiniao_counts.index, y=opiniao_counts, title="Contagem de Opiniões sobre a LITTERACI")
-fig_opiniao.update_layout(xaxis_title="Opinião", yaxis_title="Contagem", xaxis_tickangle=-45)
-st.plotly_chart(fig_opiniao)
+# Tabela de opiniões
+opiniao_df = pd.DataFrame({"Opinião": opiniao_counts.index, "Contagem": opiniao_counts.values})
+st.table(opiniao_df)
 
 # Logo
 logo = Image.open('images/logo.png')
