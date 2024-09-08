@@ -221,15 +221,13 @@ def download_csv(df, filename):
     b64 = base64.b64encode(csv.encode()).decode()
     return b64
 
+
+
 if not filtered_df.empty:
     contato_df = filtered_df[["Dados Contato"]]
-    csv_download = download_csv(contato_df, "dados_contato.csv")
-    st.download_button(
-        label="Download CSV",
-        data=csv_download,
-        file_name="dados_contato.csv",
-        mime="text/csv",
-    )
+    csv_download_link = download_csv(contato_df, "dados_contato.csv")
+    st.download_button("Download CSV", csv_download_link, "dados_contato.csv")
+    
 else:
     st.warning("Não há dados de contato disponíveis para download.")
 
