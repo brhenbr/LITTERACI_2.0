@@ -82,34 +82,32 @@ st.title("Análise das Respostas da Pesquisa LITTERACI")
 # Introdução
 st.write("Bem-vindo ao dashboard de análise das respostas da pesquisa LITTERACI! Aqui, você encontrará insights valiosos sobre a situação atual e futura das Unidades de Informação (UIs), bem como as opiniões dos participantes sobre a solução inovadora LITTERACI.")
 
+# Filtro por tipo de UI
+st.sidebar.title("Filtro")
+tipo_ui_options = ["Todas"] + list(df["Tipo de UI"].unique())
+selected_ui_types = st.sidebar.multiselect("Selecione o tipo de UI", options=tipo_ui_options, default=["Todas"])
+
+# Aplicar filtro
+if "Todas" in selected_ui_types:
+    filtered_df = df
+    filtered_situacao_atual = situacao_atual_data
+    filtered_situacao_futura = situacao_futura_data
+else:
+    filtered_df = df[df["Tipo de UI"].isin(selected_ui_types)]
+    filtered_situacao_atual = situacao_atual_data[df["Tipo de UI"].isin(selected_ui_types)]
+    filtered_situacao_futura = situacao_futura_data[df["Tipo de UI"].isin(selected_ui_types)]
+
 # Visão Geral
 st.header("Visão Geral")
-total_respostas = len(df)
+total_respostas = len(filtered_df)
 st.subheader(f"Total de respostas: {total_respostas}")
 
 # Tipos de UI
 st.subheader("Tipos de Unidades de Informação")
-tipo_ui_counts = df["Tipo de UI"].value_counts()
+tipo_ui_counts = filtered_df["Tipo de UI"].value_counts()
 fig_tipo_ui = px.pie(tipo_ui_counts, values=tipo_ui_counts, names=tipo_ui_counts.index, title="Distribuição dos Tipos de UI")
 fig_tipo_ui.update_layout(title_font=dict(size=20))
-selected_ui = st.plotly_chart(fig_tipo_ui, use_container_width=True)
-
-# Filtro por tipo de UI selecionado
-if selected_ui:
-    selected_points = selected_ui.get("selectedData", {}).get("points", [])
-    if len(selected_points) > 0:
-        selected_ui_type = selected_points[0].get("label")
-        filtered_df = df[df["Tipo de UI"] == selected_ui_type]
-        filtered_situacao_atual = situacao_atual_data[df["Tipo de UI"] == selected_ui_type]
-        filtered_situacao_futura = situacao_futura_data[df["Tipo de UI"] == selected_ui_type]
-    else:
-        filtered_df = df
-        filtered_situacao_atual = situacao_atual_data
-        filtered_situacao_futura = situacao_futura_data
-else:
-    filtered_df = df
-    filtered_situacao_atual = situacao_atual_data
-    filtered_situacao_futura = situacao_futura_data
+st.plotly_chart(fig_tipo_ui, use_container_width=True)
 
 # Situação Atual
 st.header("Situação Atual das Unidades de Informação")
