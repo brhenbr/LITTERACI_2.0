@@ -96,10 +96,16 @@ selected_ui = st.plotly_chart(fig_tipo_ui, use_container_width=True)
 
 # Filtro por tipo de UI selecionado
 if selected_ui:
-    selected_ui_type = selected_ui['data'][0]['labels'][selected_ui['data'][0]['id']]
-    filtered_df = df[df["Tipo de UI"] == selected_ui_type]
-    filtered_situacao_atual = situacao_atual_data[df["Tipo de UI"] == selected_ui_type]
-    filtered_situacao_futura = situacao_futura_data[df["Tipo de UI"] == selected_ui_type]
+    selected_points = selected_ui.get("selectedData", {}).get("points", [])
+    if len(selected_points) > 0:
+        selected_ui_type = selected_points[0].get("label")
+        filtered_df = df[df["Tipo de UI"] == selected_ui_type]
+        filtered_situacao_atual = situacao_atual_data[df["Tipo de UI"] == selected_ui_type]
+        filtered_situacao_futura = situacao_futura_data[df["Tipo de UI"] == selected_ui_type]
+    else:
+        filtered_df = df
+        filtered_situacao_atual = situacao_atual_data
+        filtered_situacao_futura = situacao_futura_data
 else:
     filtered_df = df
     filtered_situacao_atual = situacao_atual_data
