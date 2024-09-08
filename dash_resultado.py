@@ -27,7 +27,7 @@ df = load_data()
 # Processar dados das escalas
 def process_scale_data(df, col_name):
     scale_data = df[col_name].apply(lambda x: pd.Series(str(x).split(";")))
-    scale_data.columns = scale_data.columns.astype(int) + 1
+    scale_data.columns = [f"Q{i}" for i in range(1, len(scale_data.columns) + 1)]
     scale_data = scale_data.apply(pd.to_numeric)
     return scale_data
 
@@ -93,8 +93,8 @@ if "Todas" in selected_ui_types:
     filtered_situacao_futura = situacao_futura_data
 else:
     filtered_df = df[df["Tipo de UI"].isin(selected_ui_types)]
-    filtered_situacao_atual = situacao_atual_data[df["Tipo de UI"].isin(selected_ui_types)]
-    filtered_situacao_futura = situacao_futura_data[df["Tipo de UI"].isin(selected_ui_types)]
+    filtered_situacao_atual = situacao_atual_data[df["Tipo de UI"].isin(selected_ui_types)].reset_index(drop=True)
+    filtered_situacao_futura = situacao_futura_data[df["Tipo de UI"].isin(selected_ui_types)].reset_index(drop=True)
 
 # Visão Geral
 st.header("Visão Geral")
@@ -129,19 +129,20 @@ situacao_atual_perguntas = [
 
 col1, col2, col3 = st.columns(3)
 for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
-    if i % 3 == 1:
+    col = i % 3
+    if col == 1:
         with col1:
-            if len(filtered_situacao_atual[i]) > 0:
-                fig = px.histogram(filtered_situacao_atual[i], x=filtered_situacao_atual[i], nbins=10, title=pergunta)
+            if not filtered_situacao_atual[f'Q{i}'].empty:
+                fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10, title=pergunta)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
                 st.warning(f"Não há dados suficientes para exibir o gráfico da Pergunta {i}.")
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
-    elif i % 3 == 2:
+    elif col == 2:
         with col2:
-            if len(filtered_situacao_atual[i]) > 0:
-                fig = px.histogram(filtered_situacao_atual[i], x=filtered_situacao_atual[i], nbins=10, title=pergunta)
+            if not filtered_situacao_atual[f'Q{i}'].empty:
+                fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10, title=pergunta)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -149,8 +150,8 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     else:
         with col3:
-            if len(filtered_situacao_atual[i]) > 0:
-                fig = px.histogram(filtered_situacao_atual[i], x=filtered_situacao_atual[i], nbins=10, title=pergunta)
+            if not filtered_situacao_atual[f'Q{i}'].empty:
+                fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10, title=pergunta)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -169,10 +170,11 @@ situacao_futura_perguntas = [
 
 col1, col2 = st.columns(2)
 for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
-    if i % 2 == 1:
+    col = i % 2
+    if col == 1:
         with col1:
-            if len(filtered_situacao_futura[i]) > 0:
-                fig = px.histogram(filtered_situacao_futura[i], x=filtered_situacao_futura[i], nbins=10, title=pergunta)
+            if not filtered_situacao_futura[f'Q{i}'].empty:
+                fig = px.histogram(filtered_situacao_futura, x=f'Q{i}', nbins=10, title=pergunta)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
@@ -180,8 +182,8 @@ for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     else:
         with col2:
-            if len(filtered_situacao_futura[i]) > 0:
-                fig = px.histogram(filtered_situacao_futura[i], x=filtered_situacao_futura[i], nbins=10, title=pergunta)
+            if not filtered_situacao_futura[f'Q{i}'].empty:
+                fig = px.histogram(filtered_situacao_futura, x=f'Q{i}', nbins=10, title=pergunta)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
             else:
