@@ -66,13 +66,17 @@ st.markdown(
     .opiniao-table tr:nth-child(even) {
         background-color: #E6E6E6;
     }
+    [data-testid="stSidebar"] {
+        min-width: 300px;
+        max-width: 300px;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
 # Logo no menu lateral
-st.sidebar.image('images/logo.png', width=200)
+st.sidebar.image('images/logo.png', use_column_width=True)
 
 # Filtro por tipo de UI
 st.sidebar.title("Filtro")
@@ -84,9 +88,9 @@ for ui_type in tipo_ui_options:
 
 # Aplicar filtro
 if not selected_ui_types:
-    filtered_df = df
-    filtered_situacao_atual = situacao_atual_data
-    filtered_situacao_futura = situacao_futura_data
+    filtered_df = pd.DataFrame()  # DataFrame vazio
+    filtered_situacao_atual = pd.DataFrame()  # DataFrame vazio
+    filtered_situacao_futura = pd.DataFrame()  # DataFrame vazio
 else:
     filtered_df = df[df["Tipo de UI"].isin(selected_ui_types)]
     filtered_situacao_atual = situacao_atual_data[df["Tipo de UI"].isin(selected_ui_types)].reset_index(drop=True)
@@ -105,10 +109,13 @@ st.subheader(f"Total de respostas: {total_respostas}")
 
 # Tipos de UI
 st.subheader("Tipos de Unidades de Informação")
-tipo_ui_counts = filtered_df["Tipo de UI"].value_counts()
-fig_tipo_ui = px.pie(tipo_ui_counts, values=tipo_ui_counts, names=tipo_ui_counts.index, title="Distribuição dos Tipos de UI")
-fig_tipo_ui.update_layout(title_font=dict(size=20))
-st.plotly_chart(fig_tipo_ui, use_container_width=True)
+if not filtered_df.empty:
+    tipo_ui_counts = filtered_df["Tipo de UI"].value_counts()
+    fig_tipo_ui = px.pie(tipo_ui_counts, values=tipo_ui_counts, names=tipo_ui_counts.index, title="Distribuição dos Tipos de UI")
+    fig_tipo_ui.update_layout(title_font=dict(size=20))
+    st.plotly_chart(fig_tipo_ui, use_container_width=True)
+else:
+    st.warning("Não há dados suficientes para exibir o gráfico de distribuição dos Tipos de UI.")
 
 # Situação Atual
 st.header("Situação Atual das Unidades de Informação")
@@ -134,7 +141,7 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
     col = i % 3
     if col == 1:
         with col1:
-            if not filtered_situacao_atual[f'Q{i}'].empty:
+            if not filtered_situacao_atual.empty and f'Q{i}' in filtered_situacao_atual.columns:
                 fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
@@ -143,7 +150,7 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     elif col == 2:
         with col2:
-            if not filtered_situacao_atual[f'Q{i}'].empty:
+            if not filtered_situacao_atual.empty and f'Q{i}' in filtered_situacao_atual.columns:
                 fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
@@ -152,7 +159,7 @@ for i, pergunta in enumerate(situacao_atual_perguntas, start=1):
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     else:
         with col3:
-            if not filtered_situacao_atual[f'Q{i}'].empty:
+            if not filtered_situacao_atual.empty and f'Q{i}' in filtered_situacao_atual.columns:
                 fig = px.histogram(filtered_situacao_atual, x=f'Q{i}', nbins=10)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
@@ -175,7 +182,7 @@ for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
     col = i % 2
     if col == 1:
         with col1:
-            if not filtered_situacao_futura[f'Q{i}'].empty:
+            if not filtered_situacao_futura.empty and f'Q{i}' in filtered_situacao_futura.columns:
                 fig = px.histogram(filtered_situacao_futura, x=f'Q{i}', nbins=10)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
@@ -184,7 +191,7 @@ for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
             st.markdown(f'<div class="pergunta" title="{pergunta}">Pergunta {i}</div>', unsafe_allow_html=True)
     else:
         with col2:
-            if not filtered_situacao_futura[f'Q{i}'].empty:
+            if not filtered_situacao_futura.empty and f'Q{i}' in filtered_situacao_futura.columns:
                 fig = px.histogram(filtered_situacao_futura, x=f'Q{i}', nbins=10)
                 fig.update_layout(xaxis_title="Nota", yaxis_title="Frequência")
                 st.plotly_chart(fig)
@@ -195,12 +202,15 @@ for i, pergunta in enumerate(situacao_futura_perguntas, start=1):
 # Opiniões sobre a LITTERACI
 st.header("Opiniões sobre a Solução LITTERACI")
 
-opcoes_litteraci = filtered_df["Opinioes UI"].str.split(";", expand=True).stack()
-opcoes_litteraci = opcoes_litteraci[opcoes_litteraci != ""]
-opiniao_counts = opcoes_litteraci.value_counts()
+if not filtered_df.empty:
+    opcoes_litteraci = filtered_df["Opinioes UI"].str.split(";", expand=True).stack()
+    opcoes_litteraci = opcoes_litteraci[opcoes_litteraci != ""]
+    opiniao_counts = opcoes_litteraci.value_counts()
 
-opiniao_df = pd.DataFrame({"Opinião": opiniao_counts.index, "Contagem": opiniao_counts.values})
-st.table(opiniao_df)
+    opiniao_df = pd.DataFrame({"Opinião": opiniao_counts.index, "Contagem": opiniao_counts.values})
+    st.table(opiniao_df)
+else:
+    st.warning("Não há dados suficientes para exibir as opiniões sobre a Solução LITTERACI.")
 
 # Download dos dados de contato
 st.header("Dados de Contato")
@@ -209,12 +219,19 @@ st.write("Clique no botão abaixo para baixar os dados de contato dos participan
 def download_csv(df, filename):
     csv = df.to_csv(index=False)
     b64 = base64.b64encode(csv.encode()).decode()
-    href = f'<a href="data:file/csv;base64,{b64}" download="{filename}">Download CSV</a>'
-    return href
+    return b64
 
-contato_df = filtered_df[["Dados Contato"]]
-csv_download_link = download_csv(contato_df, "dados_contato.csv")
-st.download_button("Download CSV", data=csv_download_link, file_name="dados_contato.csv", mime="text/csv")
+if not filtered_df.empty:
+    contato_df = filtered_df[["Dados Contato"]]
+    csv_download = download_csv(contato_df, "dados_contato.csv")
+    st.download_button(
+        label="Download CSV",
+        data=csv_download,
+        file_name="dados_contato.csv",
+        mime="text/csv",
+    )
+else:
+    st.warning("Não há dados de contato disponíveis para download.")
 
 # Conclusão
 st.header("Conclusão")
