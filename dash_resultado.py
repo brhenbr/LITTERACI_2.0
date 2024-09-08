@@ -81,9 +81,7 @@ st.sidebar.image('images/logo.png', use_column_width=True)
 # Filtro por tipo de UI
 st.sidebar.title("Filtro")
 tipo_ui_options = df["Tipo de UI"].unique()
-default_selection = ["Biblioteca do setor público"]
-selected_ui_types = st.sidebar.multiselect("Selecione o tipo de UI", options=tipo_ui_options, default=default_selection)
-#selected_ui_types = []
+selected_ui_types = []
 for ui_type in tipo_ui_options:
     if st.sidebar.checkbox(ui_type, key=f"checkbox_{ui_type}"):
         selected_ui_types.append(ui_type)
