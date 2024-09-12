@@ -100,7 +100,7 @@ else:
 st.title("Análise das Respostas da Pesquisa LITTERACI")
 
 # Introdução
-st.write("Bem-vindo ao dashboard de análise das respostas da pesquisa LITTERACI! Aqui, você encontrará insights valiosos sobre a situação atual e futura das Unidades de Informação (UIs), bem como as opiniões dos participantes sobre a solução inovadora LITTERACI.")
+st.write("Bem-vindo ao <b>dashboard</b> de análise das respostas da pesquisa LITTERACI! Aqui, você encontrará insights valiosos sobre a situação atual e futura das Unidades de Informação (UIs), bem como as opiniões dos participantes sobre a solução inovadora LITTERACI.")
 
 # Visão Geral
 st.header("Visão Geral")
@@ -233,5 +233,6 @@ st.write("A solução LITTERACI surge como uma proposta promissora para auxiliar
 st.write("Esperamos que este dashboard tenha proporcionado uma visão clara e envolvente dos resultados da pesquisa. Agradecemos a participação de todos e convidamos vocês a explorar a solução LITTERACI para transformar suas Unidades de Informação.")
 
 # Rodapé
+
 st.markdown("---")
 st.write("Dashboard desenvolvido por LITTERACI | Powered by Streamlit")
